@@ -1,0 +1,22 @@
+1. git init
+// dir to get directories
+2. git add . 
+3. git commit -m "message"
+4. git remote add origin <remote-url from git>
+5. git push origin main/master // main for newer versions, master for older versions
+6. you can check it in remote repository
+
+this is for first time only
+
+------------------------------------------------------------------------------------------
+if you can add any files in local repository or 
+you can change the existing files 
+in local repo
+
+1. git status
+2. git add .
+3. git commit -m "message"
+4. git push origin master
+
+
+

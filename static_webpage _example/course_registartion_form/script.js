@@ -52,6 +52,17 @@ document.getElementById("regForm").addEventListener("submit", function(e){
    
     resultBox.style.display = "block";
     resultBox.className = "result-box success";
-    
-    resultBox.innerHTML = message.replace(/\n/g, "<br>");
+    let numberedList = selectedSubjects
+    .map(sub => `<li>${sub}</li>`)
+    .join("");
+
+    resultBox.innerHTML = `
+        <b>Student Name:</b> ${studentName}<br><br>
+        <b>Subjects Selected:</b>
+        <ol>${numberedList}</ol>
+        <br>
+        <b>Total Fee:</b> ₹${totalFee}
+`;
+
+
 });

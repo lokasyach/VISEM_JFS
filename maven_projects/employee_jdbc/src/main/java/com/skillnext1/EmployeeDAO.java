@@ -1,27 +1,34 @@
 package com.skillnext1;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDAO {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/skillnext_db";
+    private static final String URL = "jdbc:mysql://localhost:3306/employeedb";
     private static final String USER = "root";
-    private static final String PASSWORD = "root"; // change this
+    private static final String PASSWORD = "8837";
 
     // Add employee
     public void addEmployee(Employee emp) throws Exception {
         Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
         String sql = "INSERT INTO employee (name, email, salary) VALUES (?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
+
         stmt.setString(1, emp.getName());
         stmt.setString(2, emp.getEmail());
         stmt.setDouble(3, emp.getSalary());
+
         stmt.executeUpdate();
         conn.close();
     }
 
-    // Fetch all employees
+    // Get all employees
     public List<Employee> getAllEmployees() throws Exception {
         Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
         Statement stmt = conn.createStatement();
@@ -36,6 +43,7 @@ public class EmployeeDAO {
             e.setSalary(rs.getDouble("salary"));
             list.add(e);
         }
+
         conn.close();
         return list;
     }
@@ -55,10 +63,12 @@ public class EmployeeDAO {
         Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
         String sql = "UPDATE employee SET name=?, email=?, salary=? WHERE id=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
+
         stmt.setString(1, emp.getName());
         stmt.setString(2, emp.getEmail());
         stmt.setDouble(3, emp.getSalary());
         stmt.setInt(4, emp.getId());
+
         stmt.executeUpdate();
         conn.close();
     }

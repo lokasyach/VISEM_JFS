@@ -66,7 +66,22 @@ public class StudentDAO {
         stmt.executeUpdate();
         conn.close();
     }
+    
+    public void branchwiseCount() throws Exception {
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        String sql = "SELECT dept, COUNT(*) AS count FROM students GROUP BY dept";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            String dept = rs.getString("dept");
+            int count = rs.getInt("count");
+            System.out.println("Department: " + dept + ", Count: " + count);
+        }
+        conn.close();
+    }
 }
+
+
 // import java.sql.*;
 // import java.util.ArrayList;
 // import java.util.List;
